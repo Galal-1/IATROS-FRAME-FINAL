@@ -129,12 +129,6 @@
       const frameWidth = img.width;
       const frameHeight = img.height;
 
-      // Scale ratio so that neither width nor height exceeds 711px
-      const scale = Math.min(711 / frameWidth, 711 / frameHeight, 1);
-
-      const displayWidth = frameWidth * scale;
-      const displayHeight = frameHeight * scale;
-
       // Resize canvas + container (for screen)
       canvas.setWidth(frameWidth);
       canvas.setHeight(frameHeight);
@@ -163,7 +157,7 @@
         fabric.Image.fromURL(f.target.result, function (img) {
           if (userImage) canvas.remove(userImage);
           userImage = img;
-
+        
           // Scale to fit canvas width (you can also add height scaling)
           img.scaleToWidth(canvas.getWidth());
           if (img.getScaledHeight() > canvas.getHeight()) {
