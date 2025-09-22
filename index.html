@@ -51,7 +51,6 @@
       max-width: 400px;
     }
     #canvas-container {
-      max-width: 711px;
       background-color: #fff;
       border: 1px solid #ccc;
       border-radius: 10px;
@@ -61,7 +60,6 @@
     }
     canvas {
       display: block;
-      max-width: 711px;
     }
     .button {
       background-color: #005C53;
@@ -127,13 +125,22 @@
       const frameWidth = img.width;
       const frameHeight = img.height;
 
-      // Resize canvas + container
-      canvas.setWidth(frameWidth);
-      canvas.setHeight(frameHeight);
-      container.style.width = frameWidth + "px";
-      container.style.height = frameHeight + "px";
+      // Scale ratio so that neither width nor height exceeds 711px
+      const scale = Math.min(711 / frameWidth, 711 / frameHeight, 1);
 
+      const displayWidth = frameWidth * scale;
+      const displayHeight = frameHeight * scale;
+
+      // Resize canvas + container (for screen)
+      canvas.setWidth(displayWidth);
+      canvas.setHeight(displayHeight);
+      container.style.width = displayWidth + "px";
+      container.style.height = displayHeight + "px";
+
+      // Scale the frame for display
       img.set({
+        scaleX: scale,
+        scaleY: scale,
         selectable: false,
         evented: false,
         opacity: 0.7,
@@ -145,6 +152,7 @@
       canvas.sendToBack(img);
       canvas.renderAll();
     });
+
 
     // Upload user image
     document.getElementById('upload').addEventListener('change', function (e) {
