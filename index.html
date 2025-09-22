@@ -62,7 +62,7 @@
     }
     canvas {
       display: block;
-      width: 100%;
+            width: 100%;
       max-width: 100%;
     }
     .button {
@@ -136,15 +136,13 @@
       const displayHeight = frameHeight * scale;
 
       // Resize canvas + container (for screen)
-      canvas.setWidth(displayWidth);
-      canvas.setHeight(displayHeight);
-      container.style.width = displayWidth + "px";
-      container.style.height = displayHeight + "px";
+      canvas.setWidth(frameWidth);
+      canvas.setHeight(frameHeight);
+      container.style.width = frameWidth + "px";
+      container.style.height = frameHeight + "px";
 
       // Scale the frame for display
       img.set({
-        scaleX: scale,
-        scaleY: scale,
         selectable: false,
         evented: false,
         opacity: 0.7,
